@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Currículo pessoal em formato Single Page Application com Vue.js — MiniProj1, Programação Web Avançada.">
+  <meta name="theme-color" content="#102135">
+  <title>Daniel Santos | Currículo Digital</title>
+  <style>
+    :root { --ink:#112438; --muted:#647487; --line:#dfE8ec; --teal:#0a806f; --teal-dark:#086355; --paper:#f6f8f9; --surface:#fff; --warm:#f4cc84; --radius:22px; --shadow:0 14px 45px rgba(13,30,45,.08); }
+    * { box-sizing:border-box; }
+    html {scroll-behavior:smooth;scroll-padding-top:100px}
+    body {margin:0;background:var(--paper);color:var(--ink);font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-size:16px;line-height:1.65}
+    button,a {font:inherit} button {cursor:pointer} a {color:inherit} 
+    :focus-visible {outline:3px solid #f3a83e;outline-offset:4px;border-radius:4px}
+    [v-cloak] {display:none}
+    .wrap {width:min(1120px,calc(100% - 40px));margin:0 auto}
+    .skip-link {position:absolute;top:-100px;left:10px;background:#fff;padding:8px 12px;z-index:20}.skip-link:focus{top:10px}
+    .topbar {position:sticky;top:0;z-index:10;background:rgba(255,255,255,.96);border-bottom:1px solid var(--line);backdrop-filter:blur(14px)}
+    .nav {min-height:80px;display:flex;align-items:center;justify-content:space-between;gap:18px}
+    .brand {text-decoration:none;display:flex;align-items:center;gap:10px;font-weight:850;letter-spacing:-.5px}
+    .brand-mark {width:38px;height:38px;display:grid;place-items:center;background:var(--ink);color:#fff;border-radius:12px;font-size:14px;letter-spacing:0}
+    .nav-links {display:flex;align-items:center;gap:5px;flex-wrap:wrap}
+    .nav-links a {font-size:14px;text-decoration:none;color:var(--muted);font-weight:650;padding:10px 13px;border-radius:9px;transition:.15s}
+    .nav-links a:hover,.nav-links a.active {color:var(--teal-dark);background:#e4f4ef}
+    .nav-action {background:var(--ink)!important;color:#fff!important;padding:10px 16px!important}
+    .mobile-hint{display:none;color:var(--muted);font-size:12px}
+    .hero {padding:84px 0 70px;position:relative;overflow:hidden}
+    .hero-grid {display:grid;grid-template-columns:1.3fr .7fr;align-items:center;gap:44px}
+    .eyebrow{color:var(--teal);font-size:12px;letter-spacing:2px;font-weight:800;text-transform:uppercase}
+    h1,h2,h3,p {margin-top:0} h1{font-size:clamp(42px,6vw,74px);line-height:1.06;letter-spacing:-3px;margin-bottom:20px;max-width:690px}
+    h1 .accent {color:var(--teal)}.hero-lead{font-size:clamp(17px,2vw,20px);color:#44596b;max-width:580px;line-height:1.75}
+    .button-row{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
+    .btn {display:inline-flex;align-items:center;justify-content:center;gap:9px;border:1px solid transparent;text-decoration:none;border-radius:13px;padding:13px 19px;font-weight:750;font-size:14px;transition:transform .15s,box-shadow .15s}
+    .btn:hover{transform:translateY(-2px);box-shadow:var(--shadow)}.btn-primary{color:#fff;background:var(--teal)}.btn-light{background:#fff;color:var(--ink);border-color:#d5e0e6}
+    .hero-art {border-radius:35px;background:linear-gradient(140deg,#153447,#0a7869);position:relative;min-height:350px;display:flex;align-items:center;justify-content:center;overflow:hidden;box-shadow:0 24px 60px rgba(2,50,58,.22)}
+    .hero-art:before,.hero-art:after{content:"";position:absolute;border:1px solid rgba(255,255,255,.18);border-radius:50%;width:340px;height:340px;right:-110px;top:-130px}.hero-art:after{width:210px;height:210px;left:-80px;bottom:-80px;top:auto;right:auto}
+    .hero-monogram {color:#fff;font-size:112px;font-weight:900;letter-spacing:-10px;line-height:1;position:relative;z-index:1;transform:translateX(-5px)}
+    .art-label {position:absolute;left:20px;right:20px;bottom:20px;padding:15px 16px;border-radius:15px;background:rgba(255,255,255,.12);color:#fff;border:1px solid rgba(255,255,255,.21);backdrop-filter:blur(10px);font-size:14px}
+    .art-label strong {display:block;font-size:15px}.art-label span{opacity:.8}
+    .stats{display:flex;gap:24px;flex-wrap:wrap;margin-top:32px}.stat{border-left:3px solid #c1e7df;padding-left:14px}.stat strong{display:block;font-size:15px}.stat span{font-size:13px;color:var(--muted)}
+    .section {padding:75px 0}.section.alt{background:#edf3f4;border-top:1px solid #e1e9ec;border-bottom:1px solid #e1e9ec}
+    .section-head {margin-bottom:32px}.section h2{font-size:clamp(30px,4vw,45px);letter-spacing:-1.8px;line-height:1.17;margin:8px 0 12px}
+    .section-head p{color:var(--muted);max-width:700px;margin:0}
+    .about-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:25px}
+    .card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:27px;box-shadow:var(--shadow)}
+    .card p:last-child{margin-bottom:0}.card p{color:#42576a}
+    .mini-title{color:var(--ink);font-size:16px;font-weight:800;margin-bottom:12px}
+    .education-card {background:var(--ink);color:#fff;border-color:var(--ink)}.education-card p{color:#d3dfe8}.education-card .mini-title {color:#f6ca80}
+    .tag-list {display:flex;gap:8px;flex-wrap:wrap;margin-top:20px}.tag{padding:6px 10px;border-radius:8px;background:#e9f3f2;color:#12695e;font-size:12px;font-weight:700}
+    .education-card .tag{background:#29425a;color:#e9f4f9}
+    .work-grid,.hobby-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+    .icon-tile {width:48px;height:48px;border-radius:14px;background:#e0f3ee;display:grid;place-items:center;color:var(--teal);margin-bottom:18px}
+    .icon-tile svg{width:23px;height:23px}.card h3{font-size:19px;letter-spacing:-.5px;margin-bottom:10px}
+    .card .small{font-size:14px;color:var(--muted)}
+    .hobby-card{transition:transform .18s}.hobby-card:hover{transform:translateY(-3px)}
+    .hobby-index{font-size:12px;color:var(--teal);letter-spacing:1px;font-weight:800;margin-bottom:12px;display:block}
+    .cta{margin:65px 0 65px;background:var(--ink);padding:35px 38px;border-radius:26px;display:flex;align-items:center;justify-content:space-between;gap:20px;color:#fff}
+    .cta h2{margin:0 0 5px;font-size:26px;letter-spacing:-.8px}.cta p{margin:0;color:#d2dce4;font-size:14px}
+    .cta .btn{background:#fff;color:var(--ink);flex-shrink:0}
+    .footer{background:#0d1d2d;color:#fff;padding:37px 0}
+    .footer-grid{display:flex;justify-content:space-between;align-items:center;gap:28px;flex-wrap:wrap}.footer p{margin:0;color:#a8bac9;font-size:13px}
+    .socials{display:flex;gap:9px}.social-button{height:42px;width:42px;display:grid;place-items:center;border-radius:12px;border:1px solid #3c5165;background:#21344a;color:#fff;transition:.15s}
+    .social-button:hover{background:var(--teal);transform:translateY(-2px)}.social-button svg{height:20px;width:20px;fill:currentColor}
+    .modal-backdrop{position:fixed;inset:0;background:rgba(5,17,28,.68);display:grid;place-items:center;padding:20px;z-index:30}
+    .modal{width:min(460px,100%);background:#fff;padding:30px;border-radius:20px;box-shadow:0 20px 90px rgba(0,0,0,.3);position:relative}
+    .modal h2{font-size:25px;line-height:1.2;margin-bottom:12px}.modal p{color:var(--muted);font-size:15px}.modal-close{position:absolute;top:15px;right:15px;display:grid;place-items:center;border:0;background:#edf2f5;color:var(--ink);width:35px;height:35px;border-radius:10px;font-size:21px}
+    .modal-note{background:#f4f8f8;border:1px solid #dae6e9;padding:13px;border-radius:12px;font-size:13px;color:#526679}
+    @media(max-width:760px){.nav{padding:13px 0;flex-wrap:wrap}.nav-links{width:100%;justify-content:space-between}.nav-links a{font-size:12px;padding:7px}.mobile-hint{display:block}.hero{padding:50px 0}.hero-grid,.about-grid{grid-template-columns:1fr}.hero-art{min-height:230px;order:-1}.hero-monogram{font-size:80px}.hero h1{letter-spacing:-2px}.work-grid,.hobby-grid{grid-template-columns:1fr}.section{padding:53px 0}.cta{padding:26px;flex-direction:column;align-items:flex-start}.footer-grid{align-items:flex-start}}
+    @media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;transition:none!important}}
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#conteudo">Saltar para o conteúdo</a>
+  <svg aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden" xmlns="http://www.w3.org/2000/svg">
+    <symbol id="ic-network" viewBox="0 0 24 24"><g stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="2" width="8" height="5" rx="1"/><rect x="2" y="17" width="7" height="5" rx="1"/><rect x="15" y="17" width="7" height="5" rx="1"/><path d="M12 7v6M5.5 17v-4H19v4"/></g></symbol>
+    <symbol id="ic-server" viewBox="0 0 24 24"><g stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round"><rect x="3" y="3" width="18" height="7" rx="2"/><rect x="3" y="14" width="18" height="7" rx="2"/><path d="M7 6.5h.01M7 17.5h.01M11 6.5h7M11 17.5h7"/></g></symbol>
+    <symbol id="ic-code" viewBox="0 0 24 24"><g stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="m8 7-5 5 5 5m8-10 5 5-5 5M14 4l-4 16"/></g></symbol>
+    <symbol id="ic-linkedin" viewBox="0 0 24 24"><path d="M5.5 3a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5ZM3.5 9.8h4v11h-4v-11Zm6.3 0h3.8v1.5h.1c.5-1 1.8-1.8 3.6-1.8 3.9 0 4.6 2.4 4.6 5.5v5.8h-4v-5.1c0-1.2 0-2.8-1.8-2.8s-2.1 1.4-2.1 2.7v5.2h-4V9.8Z"/></symbol>
+    <symbol id="ic-github" viewBox="0 0 24 24"><path d="M12 1.8a10.2 10.2 0 0 0-3.2 19.9c.5.1.7-.2.7-.5v-2c-2.8.6-3.4-1.2-3.4-1.2-.4-1.1-1.1-1.4-1.1-1.4-.9-.6.1-.6.1-.6 1 .1 1.6 1 1.6 1 .9 1.5 2.2 1.1 2.8.9.1-.6.4-1.1.8-1.4-2.3-.3-4.7-1.1-4.7-5a4 4 0 0 1 1.1-2.8 3.8 3.8 0 0 1 .1-2.8s.9-.3 2.8 1.1A10 10 0 0 1 12 7.2c.9 0 1.8.1 2.6.4 1.9-1.4 2.8-1.1 2.8-1.1a3.8 3.8 0 0 1 .1 2.8 4 4 0 0 1 1.1 2.8c0 3.9-2.4 4.7-4.7 5 .5.4.9 1.1.9 2.2v2.9c0 .3.2.6.7.5A10.2 10.2 0 0 0 12 1.8Z"/></symbol>
+    <symbol id="ic-facebook" viewBox="0 0 24 24"><path d="M13.3 22v-8.8h3l.5-3.5h-3.5V7.5c0-1 .3-1.7 1.8-1.7H17V2.6a22 22 0 0 0-2.6-.1c-2.6 0-4.3 1.6-4.3 4.5v2.7H7.2v3.5h2.9V22h3.2Z"/></symbol>
+    <symbol id="ic-instagram" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/></g><circle cx="17.5" cy="6.5" r="1.2"/></symbol>
+  </svg>
+  <div id="app" v-cloak>
+    <header class="topbar">
+      <nav class="nav wrap" aria-label="Navegação principal">
+        <a class="brand" href="#inicio" @click="setSection('inicio')"><span class="brand-mark">DS</span><span>{{ perfil.nomeCurto }}</span></a>
+        <div class="nav-links">
+          <a href="#quem-sou" :class="{active:secaoAtiva==='quem-sou'}" @click="setSection('quem-sou')">Quem sou eu?</a>
+          <a href="#o-que-faco" :class="{active:secaoAtiva==='o-que-faco'}" @click="setSection('o-que-faco')">O que faço?</a>
+          <a href="#hobbies" :class="{active:secaoAtiva==='hobbies'}" @click="setSection('hobbies')">Hobbies</a>
+          <a class="nav-action" href="#contacto" @click.prevent="openModal('contacto')">Contacto</a>
+        </div>
+      </nav>
+    </header>
+    <main id="conteudo">
+      <section id="inicio" class="hero" aria-labelledby="titulo-inicio">
+        <div class="wrap hero-grid">
+          <div>
+            <span class="eyebrow">Currículo digital · MiniProj1</span>
+            <h1 id="titulo-inicio">Olá, sou o <span class="accent">{{ perfil.nomeCurto }}.</span></h1>
+            <p class="hero-lead">{{ perfil.apresentacao }}</p>
+            <div class="button-row"><a class="btn btn-primary" href="#quem-sou" @click="setSection('quem-sou')">Conhecer o meu percurso →</a><a class="btn btn-light" href="#o-que-faco" @click="setSection('o-que-faco')">O que faço</a></div>
+            <div class="stats"><div class="stat"><strong>Engenharia Informática</strong><span>Formação académica</span></div><div class="stat"><strong>Redes e Sistemas</strong><span>Área profissional</span></div></div>
+          </div>
+          <div class="hero-art" role="img" aria-label="Monograma decorativo com as iniciais DS"><div class="hero-monogram">DS.</div><div class="art-label"><strong>{{ perfil.funcao }}</strong><span>Tecnologia, aprendizagem e evolução contínua</span></div></div>
+        </div>
+      </section>
+      <section id="quem-sou" class="section alt" aria-labelledby="titulo-quem-sou">
+        <div class="wrap">
+          <div class="section-head"><span class="eyebrow">01 · Apresentação</span><h2 id="titulo-quem-sou">Quem sou eu?</h2><p>Um pouco sobre o meu percurso académico e profissional.</p></div>
+          <div class="about-grid">
+            <article class="card"><h3 class="mini-title">O meu percurso</h3><p>{{ perfil.sobre }}</p><p>Interesso-me especialmente pela forma como as infraestruturas, os sistemas e as aplicações Web se relacionam para criar soluções úteis e fiáveis.</p><div class="tag-list"><span v-for="item in competencias" :key="item" class="tag">{{ item }}</span></div></article>
+            <aside class="card education-card"><h3 class="mini-title">Formação e interesses</h3><p><strong>Licenciatura em Engenharia Informática</strong></p><p>{{ perfil.formacao }}</p><p>Procuro continuar a desenvolver competências na área do desenvolvimento Web e da integração de sistemas.</p><div class="tag-list"><span class="tag">Aprendizagem contínua</span><span class="tag">Programação Web</span></div></aside>
+          </div>
+        </div>
+      </section>
+      <section id="o-que-faco" class="section" aria-labelledby="titulo-o-que-faco">
+        <div class="wrap"><div class="section-head"><span class="eyebrow">02 · Atividade</span><h2 id="titulo-o-que-faco">O que faço?</h2><p>Áreas de trabalho e competências que fazem parte do meu dia a dia.</p></div>
+          <div class="work-grid"><article v-for="area in areas" :key="area.titulo" class="card"><div class="icon-tile"><svg aria-hidden="true"><use :href="'#ic-'+area.icone"></use></svg></div><h3>{{ area.titulo }}</h3><p class="small">{{ area.descricao }}</p></article></div>
+        </div>
+      </section>
+      <section id="hobbies" class="section alt" aria-labelledby="titulo-hobbies">
+        <div class="wrap"><div class="section-head"><span class="eyebrow">03 · Interesses</span><h2 id="titulo-hobbies">Hobbies</h2><p>Interesses fora do trabalho que também fazem parte de quem sou.</p></div>
+          <div class="hobby-grid"><article class="card hobby-card" v-for="(hobby,indice) in hobbies" :key="hobby.titulo"><span class="hobby-index">INTERESSE 0{{ indice+1 }}</span><h3>{{ hobby.titulo }}</h3><p class="small">{{ hobby.descricao }}</p></article></div>
+        </div>
+      </section>
+      <section class="wrap cta" aria-label="Contacto"><div><h2>Vamos conversar?</h2><p>Explora a minha identidade digital ou consulta a informação de contacto.</p></div><button class="btn" @click="openModal('contacto')">Abrir contacto →</button></section>
+    </main>
+    <footer class="footer"><div class="wrap footer-grid"><div><strong>{{ perfil.nomeCurto }} · Currículo digital</strong><p>MiniProj1 · Programação Web Avançada · {{ new Date().getFullYear() }}</p></div><div><p style="margin-bottom:8px">Identidade virtual</p><div class="socials"><button v-for="rede in redes" :key="rede.nome" class="social-button" type="button" @click="abrirRede(rede)" :aria-label="'Abrir '+rede.nome" :title="rede.nome"><svg aria-hidden="true"><use :href="'#ic-'+rede.icone"></use></svg></button></div></div></div></footer>
+    <div v-if="modal.aberto" class="modal-backdrop" @click.self="closeModal" @keydown.esc="closeModal"><section class="modal" role="dialog" aria-modal="true" :aria-label="modal.titulo"><button class="modal-close" type="button" aria-label="Fechar janela" @click="closeModal">×</button><span class="eyebrow">Currículo digital</span><h2>{{ modal.titulo }}</h2><p>{{ modal.texto }}</p><div class="modal-note">{{ modal.nota }}</div><div class="button-row"><button class="btn btn-primary" type="button" @click="closeModal">Fechar</button></div></section></div>
+  </div>
+  <!-- Vue 3 global (sem ferramentas de compilação). É necessária ligação à Internet para carregar a biblioteca. -->
+  <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+  <script>
+    'use strict';
+    const { createApp } = Vue;
+    createApp({
+      data() {
+        return {
+          // PERSONALIZAÇÃO: altere os textos e os URL das redes sociais abaixo.
+          perfil: {
+            nomeCurto: 'Daniel Santos',
+            funcao: 'Profissional de Sistemas e Tecnologias de Informação',
+            apresentacao: 'Sou licenciado em Engenharia Informática e trabalho na área das redes, sistemas e tecnologias de informação. Gosto de aprender e de explorar novas soluções para desafios tecnológicos.',
+            sobre: 'O meu percurso profissional está ligado à informática, com especial interesse por redes, infraestrutura e serviços tecnológicos. A formação em Engenharia Informática ajudou-me a aprofundar conhecimentos e a olhar para os problemas de uma forma mais estruturada.',
+            formacao: 'Interesse em aprofundar conhecimentos na área de Engenharia Informática e Tecnologia Web.'
+          },
+          competencias: ['Redes informáticas', 'Sistemas', 'Suporte técnico', 'Tecnologias Web'],
+          areas: [
+            { titulo: 'Redes informáticas', icone:'network', descricao: 'Configuração, acompanhamento e resolução de problemas de conectividade e infraestrutura de rede.' },
+            { titulo: 'Sistemas e serviços', icone:'server', descricao: 'Acompanhamento de equipamentos e serviços, procurando garantir disponibilidade e funcionamento adequado.' },
+            { titulo: 'Aprendizagem e Web', icone:'code', descricao: 'Interesse em programação, aplicações Web e integração entre diferentes sistemas e tecnologias.' }
+          ],
+          hobbies: [
+            { titulo:'Futebol e desporto', descricao:'Acompanho o desporto e gosto especialmente do futebol, tanto pela competição como pelo espírito de equipa.' },
+            { titulo:'Tecnologia e projetos', descricao:'Gosto de descobrir equipamentos, experimentar soluções técnicas e explorar ideias ligadas à informática.' },
+            { titulo:'Impressão 3D e criação', descricao:'Tenho interesse em projetos de impressão 3D e na possibilidade de transformar uma ideia num objeto útil.' }
+          ],
+          // Introduza os URL verdadeiros dos seus perfis; por omissão os ícones abrem uma indicação de configuração.
+          redes: [
+            {nome:'LinkedIn',icone:'linkedin',url:''},
+            {nome:'GitHub',icone:'github',url:''},
+            {nome:'Facebook',icone:'facebook',url:''},
+            {nome:'Instagram',icone:'instagram',url:''}
+          ],
+          secaoAtiva:'inicio',
+          modal:{aberto:false,titulo:'',texto:'',nota:''}
+        };
+      },
+      methods: {
+        setSection(secao){this.secaoAtiva=secao;},
+        openModal(tipo){if(tipo==='contacto'){this.modal={aberto:true,titulo:'Contactos',texto:'Os contactos pessoais podem ser adicionados a esta secção, se quiseres disponibilizá-los publicamente.',nota:'Por razões de privacidade, este exemplo não inclui e-mail, telefone ou ligações de perfis que não tenham sido fornecidos.'};}},
+        closeModal(){this.modal.aberto=false;},
+        abrirRede(rede){if(rede.url && /^https:\/\//i.test(rede.url)){window.open(rede.url,'_blank','noopener,noreferrer');return;}this.modal={aberto:true,titulo:rede.nome,texto:'A ligação para este perfil ainda não foi configurada.',nota:'Para ativar este ícone, introduz o URL real no campo redes do objeto data() no ficheiro index.html.'};}
+      },
+      mounted(){const secao=window.location.hash.replace('#','');if(['quem-sou','o-que-faco','hobbies'].includes(secao))this.secaoAtiva=secao;window.addEventListener('hashchange',()=>{const hash=window.location.hash.substring(1);if(['inicio','quem-sou','o-que-faco','hobbies'].includes(hash))this.secaoAtiva=hash;});}
+    }).mount('#app');
+  </script>
+</body>
+</html>
