@@ -1,5 +1,6 @@
-Tarefa 2.2 — Programação Web Avançada
-Nome do projeto: MiniProj1
+TAREFA 2.2 — PROGRAMACAO WEB AVANCADA (MEIW 2026/2027)
 
-URL do repositório GitHub: https://danielsantos1980.github.io/MiniProj1
+Nome do projeto Git: MiniProj1
 
+Repositorio GitHub:
+https://danielsantos1980.github.io/MiniProj1

@@ -97,11 +97,11 @@
       <section id="inicio" class="hero" aria-labelledby="titulo-inicio">
         <div class="wrap hero-grid">
           <div>
-            <span class="eyebrow">Currículo digital · MiniProj1</span>
+            <span class="eyebrow">MEIW · 1.º ano de mestrado · MiniProj1</span>
             <h1 id="titulo-inicio">Olá, sou o <span class="accent">{{ perfil.nomeCurto }}.</span></h1>
             <p class="hero-lead">{{ perfil.apresentacao }}</p>
             <div class="button-row"><a class="btn btn-primary" href="#quem-sou" @click="setSection('quem-sou')">Conhecer o meu percurso →</a><a class="btn btn-light" href="#o-que-faco" @click="setSection('o-que-faco')">O que faço</a></div>
-            <div class="stats"><div class="stat"><strong>Engenharia Informática</strong><span>Formação académica</span></div><div class="stat"><strong>Redes e Sistemas</strong><span>Área profissional</span></div></div>
+            <div class="stats"><div class="stat"><strong>Licenciatura em Engenharia Informática</strong><span>Formação de base</span></div><div class="stat"><strong>Redes e Sistemas</strong><span>Área profissional</span></div></div>
           </div>
           <div class="hero-art" role="img" aria-label="Monograma decorativo com as iniciais DS"><div class="hero-monogram">DS.</div><div class="art-label"><strong>{{ perfil.funcao }}</strong><span>Tecnologia, aprendizagem e evolução contínua</span></div></div>
         </div>
@@ -127,34 +127,37 @@
       </section>
       <section class="wrap cta" aria-label="Contacto"><div><h2>Vamos conversar?</h2><p>Explora a minha identidade digital ou consulta a informação de contacto.</p></div><button class="btn" @click="openModal('contacto')">Abrir contacto →</button></section>
     </main>
-    <footer class="footer"><div class="wrap footer-grid"><div><strong>{{ perfil.nomeCurto }} · Currículo digital</strong><p>MiniProj1 · Programação Web Avançada · {{ new Date().getFullYear() }}</p></div><div><p style="margin-bottom:8px">Identidade virtual</p><div class="socials"><button v-for="rede in redes" :key="rede.nome" class="social-button" type="button" @click="abrirRede(rede)" :aria-label="'Abrir '+rede.nome" :title="rede.nome"><svg aria-hidden="true"><use :href="'#ic-'+rede.icone"></use></svg></button></div></div></div></footer>
+    <footer class="footer"><div class="wrap footer-grid"><div><strong>{{ perfil.nomeCurto }} · Currículo digital</strong><p>MiniProj1 · Programação Web Avançada · MEIW 2026/2027</p></div><div><p style="margin-bottom:8px">Identidade virtual</p><div class="socials"><button v-for="rede in redes" :key="rede.nome" class="social-button" type="button" @click="abrirRede(rede)" :aria-label="'Abrir '+rede.nome" :title="rede.nome"><svg aria-hidden="true"><use :href="'#ic-'+rede.icone"></use></svg></button></div></div></div></footer>
     <div v-if="modal.aberto" class="modal-backdrop" @click.self="closeModal" @keydown.esc="closeModal"><section class="modal" role="dialog" aria-modal="true" :aria-label="modal.titulo"><button class="modal-close" type="button" aria-label="Fechar janela" @click="closeModal">×</button><span class="eyebrow">Currículo digital</span><h2>{{ modal.titulo }}</h2><p>{{ modal.texto }}</p><div class="modal-note">{{ modal.nota }}</div><div class="button-row"><button class="btn btn-primary" type="button" @click="closeModal">Fechar</button></div></section></div>
   </div>
-   <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+  <!-- Vue 3 global (sem ferramentas de compilação). É necessária ligação à Internet para carregar a biblioteca. -->
+  <script src="https://unpkg.com/vue@3.5.18/dist/vue.global.prod.js"></script>
   <script>
     'use strict';
     const { createApp } = Vue;
     createApp({
       data() {
         return {
+          // PERSONALIZAÇÃO: altere os textos e os URL das redes sociais abaixo.
           perfil: {
             nomeCurto: 'Daniel Santos',
-            funcao: 'Profissional de Sistemas e Tecnologias de Informação',
-            apresentacao: 'Sou licenciado em Engenharia Informática e trabalho na área das redes, sistemas e tecnologias de informação. Gosto de aprender e de explorar novas soluções para desafios tecnológicos.',
-            sobre: 'O meu percurso profissional está ligado à informática, com especial interesse por redes, infraestrutura e serviços tecnológicos. A formação em Engenharia Informática ajudou-me a aprofundar conhecimentos e a olhar para os problemas de uma forma mais estruturada.',
-            formacao: 'Interesse em aprofundar conhecimentos na área de Engenharia Informática e Tecnologia Web.'
+            funcao: 'Sistemas e Tecnologias de Informação · Estudante de Mestrado',
+            apresentacao: 'Sou licenciado em Engenharia Informática, trabalho na área das redes e dos sistemas e frequento o 1.º ano do Mestrado em Engenharia Informática e Tecnologia Web. Gosto de aprender e de encontrar soluções úteis para problemas do dia a dia.',
+            sobre: 'Trabalho na área da informática, especialmente com redes, equipamentos e serviços. Ao longo do meu percurso tenho procurado resolver problemas técnicos e aprender novas ferramentas. Depois de concluir a licenciatura, decidi continuar os estudos para aprofundar conhecimentos em desenvolvimento Web.',
+            formacao: 'Atualmente frequento o 1.º ano do Mestrado em Engenharia Informática e Tecnologia Web (UTAD / Universidade Aberta).'
           },
           competencias: ['Redes informáticas', 'Sistemas', 'Suporte técnico', 'Tecnologias Web'],
           areas: [
             { titulo: 'Redes informáticas', icone:'network', descricao: 'Configuração, acompanhamento e resolução de problemas de conectividade e infraestrutura de rede.' },
             { titulo: 'Sistemas e serviços', icone:'server', descricao: 'Acompanhamento de equipamentos e serviços, procurando garantir disponibilidade e funcionamento adequado.' },
-            { titulo: 'Aprendizagem e Web', icone:'code', descricao: 'Interesse em programação, aplicações Web e integração entre diferentes sistemas e tecnologias.' }
+            { titulo: 'Estudo e projetos Web', icone:'code', descricao: 'No mestrado, estou a desenvolver competências em HTML, CSS, JavaScript e Vue.js, aplicando-as em pequenos projetos.' }
           ],
           hobbies: [
             { titulo:'Futebol e desporto', descricao:'Acompanho o desporto e gosto especialmente do futebol, tanto pela competição como pelo espírito de equipa.' },
             { titulo:'Tecnologia e projetos', descricao:'Gosto de descobrir equipamentos, experimentar soluções técnicas e explorar ideias ligadas à informática.' },
             { titulo:'Impressão 3D e criação', descricao:'Tenho interesse em projetos de impressão 3D e na possibilidade de transformar uma ideia num objeto útil.' }
           ],
+          // Introduza os URL verdadeiros dos seus perfis; por omissão os ícones abrem uma indicação de configuração.
           redes: [
             {nome:'LinkedIn',icone:'linkedin',url:''},
             {nome:'GitHub',icone:'github',url:''},
