@@ -3,4 +3,3 @@ Nome do projeto: MiniProj1
 
 URL do repositório GitHub: https://danielsantos1980.github.io/MiniProj1
 
-Nota: o repositório ainda não foi publicado. Este ficheiro deve ser atualizado antes da submissão.
