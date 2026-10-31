@@ -1,6 +1,6 @@
 Tarefa 2.2 — Programação Web Avançada
 Nome do projeto: MiniProj1
 
-URL do repositório GitHub: [INSERIR LINK REAL APÓS CRIAR O REPOSITÓRIO]
+URL do repositório GitHub: https://danielsantos1980.github.io/MiniProj1
 
 Nota: o repositório ainda não foi publicado. Este ficheiro deve ser atualizado antes da submissão.
