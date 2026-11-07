@@ -130,6 +130,7 @@
     <footer class="footer"><div class="wrap footer-grid"><div><strong>{{ perfil.nomeCurto }} · Currículo digital</strong><p>MiniProj1 · Programação Web Avançada · MEIW 2026/2027</p></div><div><p style="margin-bottom:8px">Identidade virtual</p><div class="socials"><button v-for="rede in redes" :key="rede.nome" class="social-button" type="button" @click="abrirRede(rede)" :aria-label="'Abrir '+rede.nome" :title="rede.nome"><svg aria-hidden="true"><use :href="'#ic-'+rede.icone"></use></svg></button></div></div></div></footer>
     <div v-if="modal.aberto" class="modal-backdrop" @click.self="closeModal" @keydown.esc="closeModal"><section class="modal" role="dialog" aria-modal="true" :aria-label="modal.titulo"><button class="modal-close" type="button" aria-label="Fechar janela" @click="closeModal">×</button><span class="eyebrow">Currículo digital</span><h2>{{ modal.titulo }}</h2><p>{{ modal.texto }}</p><div class="modal-note">{{ modal.nota }}</div><div class="button-row"><button class="btn btn-primary" type="button" @click="closeModal">Fechar</button></div></section></div>
   </div>
+  <!-- Vue 3 global (sem ferramentas de compilação). É necessária ligação à Internet para carregar a biblioteca. -->
   <script src="https://unpkg.com/vue@3.5.18/dist/vue.global.prod.js"></script>
   <script>
     'use strict';
@@ -137,6 +138,7 @@
     createApp({
       data() {
         return {
+          // PERSONALIZAÇÃO: altere os textos e os URL das redes sociais abaixo.
           perfil: {
             nomeCurto: 'Daniel Santos',
             funcao: 'Sistemas e Tecnologias de Informação · Estudante de Mestrado',
@@ -155,11 +157,12 @@
             { titulo:'Tecnologia e projetos', descricao:'Gosto de descobrir equipamentos, experimentar soluções técnicas e explorar ideias ligadas à informática.' },
             { titulo:'Impressão 3D e criação', descricao:'Tenho interesse em projetos de impressão 3D e na possibilidade de transformar uma ideia num objeto útil.' }
           ],
+          // Introduza os URL verdadeiros dos seus perfis; por omissão os ícones abrem uma indicação de configuração.
           redes: [
-            {nome:'LinkedIn',icone:'linkedin',url:''},
-            {nome:'GitHub',icone:'github',url:''},
-            {nome:'Facebook',icone:'facebook',url:''},
-            {nome:'Instagram',icone:'instagram',url:''}
+            {nome:'LinkedIn',icone:'linkedin',url:'https://www.linkedin.com/in/daniel-santos-25843125/'},
+            {nome:'GitHub',icone:'github',url:'https://github.com/DanielSantos1980/'},
+            {nome:'Facebook',icone:'facebook',url:'https://www.facebook.com/bugzito1980'},
+            {nome:'Instagram',icone:'instagram',url:'https://www.instagram.com/daniel.santos.1980/'}
           ],
           secaoAtiva:'inicio',
           modal:{aberto:false,titulo:'',texto:'',nota:''}
@@ -167,7 +170,7 @@
       },
       methods: {
         setSection(secao){this.secaoAtiva=secao;},
-        openModal(tipo){if(tipo==='contacto'){this.modal={aberto:true,titulo:'Contactos',texto:'Os contactos pessoais podem ser adicionados a esta secção, se quiseres disponibilizá-los publicamente.',nota:'Por razões de privacidade, este exemplo não inclui e-mail, telefone ou ligações de perfis que não tenham sido fornecidos.'};}},
+        openModal(tipo){if(tipo==='contacto'){this.modal={aberto:true,titulo:'Contactos',texto:'Os contactos pessoais serão adicionados nesta página.',nota:''};}},
         closeModal(){this.modal.aberto=false;},
         abrirRede(rede){if(rede.url && /^https:\/\//i.test(rede.url)){window.open(rede.url,'_blank','noopener,noreferrer');return;}this.modal={aberto:true,titulo:rede.nome,texto:'A ligação para este perfil ainda não foi configurada.',nota:'Para ativar este ícone, introduz o URL real no campo redes do objeto data() no ficheiro index.html.'};}
       },
